@@ -74,7 +74,7 @@ spec:
              pwd
              cd jenkins-kaniko/jenkins-k8-cicd-main
              ls
-            /kaniko/executor --context `pwd` --destination Mirzasadaq/kaniko:${BUILD_NUMBER}
+            /kaniko/executor --context `pwd` --destination mirzasadaq/kaniko:${BUILD_NUMBER}
           '''
         }
 
@@ -112,7 +112,7 @@ spec:
                   unzip awscliv2.zip
                   sudo ./aws/install
                   aws --version
-                  aws eks update-kubeconfig --name demo-cluster --region ${AWS_DEFAULT_REGION}
+                  aws eks update-kubeconfig --name eksdemo --region ${AWS_DEFAULT_REGION}
                   echo "Kubectl Installation"
                   curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
                   chmod +x ./kubectl
@@ -126,7 +126,7 @@ spec:
                   git clone https://oauth2:${HELM_REPO_PRIVATE_TOKEN}@github.com/Mirzasadaq/k8-helm.git
                   ls
                   cd k8-helm/k8-helm-main
-                  helm upgrade --install hello -f charts/hello/values.yaml --set image.repository=Mirzasadaq/kaniko:${BUILD_NUMBER} --namespace hello charts/hello/ --atomic --timeout 1m25s --cleanup-on-fail
+                  helm upgrade --install hello -f charts/hello/values.yaml --set image.repository=mirzasadaq/kaniko:${BUILD_NUMBER} --namespace hello charts/hello/ --atomic --timeout 1m25s --cleanup-on-fail
                '''
               }
             }
